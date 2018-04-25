@@ -47,12 +47,11 @@ public class ConsultaFormBean {
     }
 
       
-    public List<String> Validar(DataSource dataSource, String cpf) {
+    public List<String> validar(/*DataSource dataSource, String ref_cpf*/) {
         List<String> mensagens = new ArrayList<String>();
-        ConsultaDAO cdao = new ConsultaDAO(dataSource);
-
+        //ConsultaDAO cDao = new ConsultaDAO(dataSource);
         if (ref_crm.trim().length() == 0) {
-            mensagens.add("O endereço não pode ser vazio!");
+            mensagens.add("O CRM não pode ser vazio!");
         }
         if (ref_cpf.contains(".")) {
             mensagens.add("CPF não pode conter pontos!");

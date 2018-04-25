@@ -5,39 +5,55 @@
  */
 package br.ufscar.dc.consulta.servlets;
 
+import br.ufscar.dc.consulta.beans.Consulta;
+import br.ufscar.dc.consulta.dao.ConsultaDAO;
 import br.ufscar.dc.consulta.forms.ConsultaFormBean;
 import java.io.IOException;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.beanutils.BeanUtils;
+import javax.sql.DataSource;
 
 /**
  *
  * @author duduoliverio
  */
-@WebServlet(name = "NovaConsultaServlet", urlPatterns = {"/NovaConsultaServlet"})
-public class NovaConsultaServlet extends HttpServlet {
+@WebServlet(name = "GravarConsultaServlet", urlPatterns = {"/GravarConsultaServlet"})
+public class GravarConsultaServlet extends HttpServlet {
+
+    @Resource(name = "jdbc/ConsultaDBLocal")
+    DataSource dataSource;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        ConsultaFormBean cfb = new ConsultaFormBean();
-        try {
-            BeanUtils.populate(cfb, request.getParameterMap());
-            request.getSession().setAttribute("novaConsulta", cfb);
-            List<String> mensagens = cfb.validar();
-            if (mensagens == null) {
-                request.getRequestDispatcher("confirmarConsulta.jsp").forward(request, response);
-            } else {
-                request.setAttribute("mensagens", mensagens);
-                request.getRequestDispatcher("consultaForm.jsp").forward(request, response);
-            }
+        ConsultaFormBean cfb = (ConsultaFormBean) request.getSession().getAttribute("novaConsulta");
+        request.getSession().removeAttribute("novaConsulta");
 
+        ConsultaDAO cdao = new ConsultaDAO(dataSource);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataConsulta = null;
+        try {
+            dataConsulta = sdf.parse(cfb.getDataDoExame());
+        } catch (ParseException e) {
+            request.setAttribute("mensagem", e.getLocalizedMessage());
+            request.getRequestDispatcher("erro.jsp").forward(request, response);
+        }
+        try {
+            Consulta c = new Consulta();
+            c.setRef_cpf(cfb.getRef_cpf());
+            c.setRef_crm(cfb.getRef_crm());
+            c = cdao.gravarConsulta(c);
+            request.setAttribute("mensagem", "Obrigado pelo cadastro da consulta!");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         } catch (Exception e) {
+            e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
         }

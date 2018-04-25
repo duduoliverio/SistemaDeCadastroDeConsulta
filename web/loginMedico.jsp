@@ -15,6 +15,7 @@
     </head>
     
     <body>
+        <h1>Entre com o login de médico</h1>
         <form action="LoginMedicoServlet" method="post">
             <label for="crm">CRM </label>
             <input type="text" name="crm"/><br/>

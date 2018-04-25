@@ -6,8 +6,6 @@
 package br.ufscar.dc.consulta.dao;
 
 import br.ufscar.dc.consulta.beans.Consulta;
-import br.ufscar.dc.consulta.beans.Medico;
-import br.ufscar.dc.consulta.beans.Paciente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

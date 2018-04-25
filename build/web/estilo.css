@@ -10,7 +10,7 @@ and open the template in the editor.
 
 body { background-color: white;}
 h1 { font-style: normal;}
-p { color: red; }
+p { color: blue; }
 a {color: black; font-variant: ruby; font-size: 1.5em;}
 table { border-collapse: collapse; }
 table, th, td { border: 1px solid black; }

@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Novo paciente</h1>
+        <h1>Novo Médico</h1>
         Atenção! Deseja realmente cadastrar?
         <br/><br/>
         CRM: ${sessionScope.novoMedico.crm}<br/><br/>

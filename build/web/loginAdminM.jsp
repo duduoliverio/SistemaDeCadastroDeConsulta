@@ -15,6 +15,7 @@
     </head>
     
     <body>
+        <h1>Entre com o login de administrador</h1>
         <form action="LoginAdminMServlet" method="post">
             <label for="usuario">Username: </label>
             <input type="text" name="usuario"/><br/>

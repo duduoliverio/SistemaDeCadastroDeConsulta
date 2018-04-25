@@ -1,6 +1,6 @@
 <%-- 
     Document   : confirmarPaciente
-    Created on : 12/04/2018, 21:23:32
+    Created on : 10/04/2018, 21:23:32
     Author     : duduoliverio
 --%>
 
@@ -13,15 +13,15 @@
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Novo Médico</h1>
+        <h1>Novo cadastro de consulta</h1>
         Atenção! Deseja realmente cadastrar?
         <br/><br/>
-        CRM: ${sessionScope.novoMedico.crm}<br/><br/>
-        Nome: ${sessionScope.novoMedico.nome}<br/><br/>
-        Especialidade: ${sessionScope.novoMedico.especialidade}<br/><br/>
+        CPF: ${sessionScope.novaConsulta.ref_cpf}<br/><br/>
+        CRM: ${sessionScope.novaConsulta.ref_crm}<br/><br/>
+        Data da consulta: ${sessionScope.novaConsulta.dataDoExame}<br/><br/>
         <br/>
-        <a href="GravarMedicoServlet">Confirmar</a>
-        <a href="medicoForm.jsp">Modificar</a>
+        <a href="GravarConsultaServlet">Confirmar</a>
+        <a href="consultaForm.jsp">Modificar</a>
         <a href="index.jsp">Cancelar</a>
     </body>
 </html>

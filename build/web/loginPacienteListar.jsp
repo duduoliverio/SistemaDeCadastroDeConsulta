@@ -15,6 +15,7 @@
     </head>
     
     <body>
+        <h1>Entre com o login de paciente</h1>
         <form action="LoginPacienteListaServlet" method="post">
             <label for="cpf">CPF </label>
             <input type="text" name="cpf"/><br/>

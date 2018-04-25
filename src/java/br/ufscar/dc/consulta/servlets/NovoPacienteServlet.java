@@ -7,7 +7,6 @@ package br.ufscar.dc.consulta.servlets;
 
 import br.ufscar.dc.consulta.forms.NovoPacienteFormBean;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
