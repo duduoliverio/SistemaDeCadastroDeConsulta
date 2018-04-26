@@ -48,13 +48,13 @@ public class LoginPacienteListaServlet extends HttpServlet {
                 paciente = pdao.buscarPaciente(cpf);
                 if (paciente == null) {
                     request.getSession().setAttribute("login_mensagem", "Login Inválido!");
-                    response.sendRedirect("loginPacienteLista.jsp");
+                    response.sendRedirect("loginPacienteListar.jsp");
                 } else if (paciente.getSenha().equals(senha)) {
                     request.getSession().setAttribute("cpf", paciente.getCpf());
-                    response.sendRedirect("listaConsultas.jsp");
+                    response.sendRedirect("listaConsultaPaciente.jsp");
                 } else {
                     request.getSession().setAttribute("login_mensagem", "Login Inválido!");
-                    response.sendRedirect("loginPacienteLista.jsp");
+                    response.sendRedirect("loginPacienteListar.jsp");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

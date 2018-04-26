@@ -5,22 +5,18 @@
  */
 package br.ufscar.dc.consulta.forms;
 
-import br.ufscar.dc.consulta.dao.ConsultaDAO;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import javax.sql.DataSource;
 
 /**
  *
  * @author duduoliverio
  */
-public class ConsultaFormBean {
-    
-    private String ref_crm, ref_cpf, dataDoExame;
+public class NovaConsultaFormBean {
+
+    private String ref_crm, ref_cpf, dataConsulta;
 
     public String getRef_crm() {
         return ref_crm;
@@ -38,18 +34,16 @@ public class ConsultaFormBean {
         this.ref_cpf = ref_cpf;
     }
 
-    public String getDataDoExame() {
-        return dataDoExame;
+    public String getDataConsulta() {
+        return dataConsulta;
     }
 
-    public void setDataDoExame(String dataDoExame) {
-        this.dataDoExame = dataDoExame;
+    public void setDataConsulta(String dataConsulta) {
+        this.dataConsulta = dataConsulta;
     }
 
-      
-    public List<String> validar(/*DataSource dataSource, String ref_cpf*/) {
+    public List<String> validar() {
         List<String> mensagens = new ArrayList<String>();
-        //ConsultaDAO cDao = new ConsultaDAO(dataSource);
         if (ref_crm.trim().length() == 0) {
             mensagens.add("O CRM não pode ser vazio!");
         }
@@ -62,15 +56,15 @@ public class ConsultaFormBean {
         if (ref_cpf.trim().length() == 0) {
             mensagens.add("CPF não pode ser vazio");
         }
-             
+
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.parse(dataDoExame);
+            sdf.parse(dataConsulta);
         } catch (ParseException pe) {
-            mensagens.add("Data do exame não é valida!");
+            mensagens.add("Data da consulta não é valida!");
         }
-        
+
         return (mensagens.isEmpty() ? null : mensagens);
     }
-    
+
 }

@@ -9,7 +9,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:if test="${sessionScope.usuario != 'admin'}">
         <c:redirect url="index.jsp"></c:redirect>
-</c:if>
+</c:if> 
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,7 +17,7 @@
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Novo paciente</h1>
+        <h1>Novo médico</h1>
         <hr>
         <c:if test="${!empty requestScope.mensagens}">
             <ul class="erro">

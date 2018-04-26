@@ -5,8 +5,8 @@
  */
 package br.ufscar.dc.consulta.servlets;
 
-import br.ufscar.dc.consulta.beans.Consulta;
 import br.ufscar.dc.consulta.dao.ConsultaDAO;
+import br.ufscar.dc.consulta.forms.NovaConsultaFormBean;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -22,8 +22,8 @@ import javax.sql.DataSource;
  *
  * @author duduoliverio
  */
-@WebServlet(name = "VerConsultaPacienteServlet", urlPatterns = {"/VerConsultaPacienteServlet"})
-public class VerConsultaPacienteServlet extends HttpServlet {
+@WebServlet(name = "ListaPacienteServlet", urlPatterns = {"/ListaPacienteServlet"})
+public class ListaPacienteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,21 +34,23 @@ public class VerConsultaPacienteServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Resource(name="jdbc/ConsultaDBLocal")
+    @Resource(name = "jdbc/ConsultaDBLocal")
     DataSource dataSource;
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String Ref_cpf = request.getParameter("Ref_cpf");
+
+        List<NovaConsultaFormBean> todasConsultas = null;
         ConsultaDAO cdao = new ConsultaDAO(dataSource);
-        String cpf = request.getParameter("ref_cpf");
-        List<Consulta> todasConsultas = null;
         try {
-                todasConsultas = cdao.listarConsultasPaciente(cpf);
-            request.setAttribute("listaConsultas", todasConsultas);
-            request.getRequestDispatcher("listaConsultas.jsp").forward(request, response);
+            todasConsultas = cdao.buscarConsultaPaciente(Ref_cpf);
+            request.setAttribute("todasConsultas", todasConsultas);
+            request.getRequestDispatcher("listaConsultaPaciente.jsp").forward(request, response);
         } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("mensagem", e.getLocalizedMessage());
+            e.getStackTrace();
+            request.setAttribute("mensagem", e.getMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
         }
     }

@@ -1,7 +1,9 @@
 package teste;
 
+import br.ufscar.dc.consulta.beans.Consulta;
 import br.ufscar.dc.consulta.beans.Medico;
 import br.ufscar.dc.consulta.beans.Paciente;
+import br.ufscar.dc.consulta.dao.ConsultaDAO;
 import br.ufscar.dc.consulta.dao.MedicoDAO;
 import br.ufscar.dc.consulta.dao.PacienteDAO;
 import java.io.IOException;
@@ -78,6 +80,22 @@ public class TestarDAO extends HttpServlet {
             Logger.getLogger(TestarDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
                 
+        ConsultaDAO cdao = new ConsultaDAO(dataSource);
+        Consulta c = new Consulta();
+        p.getCpf();
+        m.getCrm();
+        c.setDataConsulta(new Date());
+        
+        Consulta c2 = null;
+
+        try {
+            c2 = cdao.gravarConsulta(c);
+        } catch (SQLException ex) {
+            Logger.getLogger(TestarDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
+            Logger.getLogger(TestarDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

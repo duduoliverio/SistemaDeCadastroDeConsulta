@@ -1,5 +1,5 @@
 <%-- 
-    Document   : medicoForm
+    Document   : pacienteForm
     Created on : 10/04/2018, 21:14:24
     Author     : duduoliverio
 --%>
@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Novo médico</h1>
+        <h1>Novo paciente</h1>
         <hr>
         <c:if test="${!empty requestScope.mensagens}">
             <ul class="erro">
@@ -24,7 +24,6 @@
             </ul>
             <hr>
         </c:if>
-
 
         <form action="NovoPacienteServlet" method="post">
             Digite seus dados:<br/><br/>

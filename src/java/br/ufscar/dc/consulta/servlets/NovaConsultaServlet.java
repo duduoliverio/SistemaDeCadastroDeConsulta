@@ -5,14 +5,21 @@
  */
 package br.ufscar.dc.consulta.servlets;
 
-import br.ufscar.dc.consulta.forms.ConsultaFormBean;
+import br.ufscar.dc.consulta.beans.Medico;
+import br.ufscar.dc.consulta.beans.Paciente;
+import br.ufscar.dc.consulta.dao.MedicoDAO;
+import br.ufscar.dc.consulta.dao.PacienteDAO;
+import br.ufscar.dc.consulta.forms.NovaConsultaFormBean;
+import br.ufscar.dc.consulta.forms.NovoMedicoFormBean;
 import java.io.IOException;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import org.apache.commons.beanutils.BeanUtils;
 
 /**
@@ -22,14 +29,17 @@ import org.apache.commons.beanutils.BeanUtils;
 @WebServlet(name = "NovaConsultaServlet", urlPatterns = {"/NovaConsultaServlet"})
 public class NovaConsultaServlet extends HttpServlet {
 
+    @Resource(name = "jdbc/ConsultaDBLocal")
+    DataSource dataSource;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        ConsultaFormBean cfb = new ConsultaFormBean();
+        NovaConsultaFormBean ncfb = new NovaConsultaFormBean();
         try {
-            BeanUtils.populate(cfb, request.getParameterMap());
-            request.getSession().setAttribute("novaConsulta", cfb);
-            List<String> mensagens = cfb.validar();
+            BeanUtils.populate(ncfb, request.getParameterMap());
+            request.getSession().setAttribute("novaConsulta", ncfb);
+            List<String> mensagens = ncfb.validar();
             if (mensagens == null) {
                 request.getRequestDispatcher("confirmarConsulta.jsp").forward(request, response);
             } else {

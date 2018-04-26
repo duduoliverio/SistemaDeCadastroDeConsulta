@@ -51,7 +51,7 @@ public class LoginMedicoServlet extends HttpServlet {
                     response.sendRedirect("loginMedico.jsp");
                 } else if (medico.getSenha().equals(senha)) {
                     request.getSession().setAttribute("crm", medico.getCrm());
-                    response.sendRedirect("listaConsultaMedicos.jsp");
+                    response.sendRedirect("listaConsultaMedico.jsp");
                 } else {
                     request.getSession().setAttribute("login_mensagem", "Login Inválido!");
                     response.sendRedirect("loginMedico.jsp");
